@@ -1,7 +1,7 @@
 
 where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
-include $(REQUIRE_TOOLS)/driver.makefile
+include $(E3_REQUIRE_TOOLS)/driver.makefile
 
 APP:=nds3
 APPSRC:=src
@@ -26,3 +26,7 @@ HEADERS += $(wildcard $(APPINC)/nds3impl/*.h)
 
 SOURCES = $(wildcard $(APPSRC)/*.cpp)
 
+
+# db rule is the default in RULES_E3, so add the empty one
+
+db:
