@@ -1,0 +1,22 @@
+
+# Create Symbolic links for all nds3 headers
+NDS3_HEADERS_TARGET:=$(E3_MODULES_INSTALL_LOCATION_INC)/nds3
+
+NDS3_HEADERS=$(wildcard $(E3_MODULES_INSTALL_LOCATION_INC)/*.h)
+
+
+include_nds3:  mkdir_nds3 $(NDS3_HEADERS)
+
+mkdir_nds3:
+	$(SUDO) mkdir -p  $(NDS3_HEADERS_TARGET)
+
+
+$(NDS3_HEADERS):
+	@printf "Symbolic link ... %44s >>> %40s \n" "$@" "$(NDS3_HEADERS_TARGET)/$(notdir $@)"
+	@$(SUDO) ln -snf $@  $(NDS3_HEADERS_TARGET)/$(notdir $@)	
+
+.PHONY: include_nds3 $(NDS3_HEADERS) mkdir_nds3
+
+
+VARS_EXCLUDES+=NDS3_HEADERS_TARGET
+VARS_EXCLUDES+=NDS3_HEADERS
