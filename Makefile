@@ -85,8 +85,8 @@ help:
 
 default: help
 
-
-install: uninstall
+install: uninstall install_nds include_nds3
+install_nds: 
 	$(QUIET) sudo -E bash -c 'make $(M_OPTIONS) install'
 
 ## Uninstall "Require" Module in order not to use it
@@ -155,6 +155,7 @@ env:
 	$(QUIET) echo "REQUIRE_PATH                : "$(REQUIRE_PATH)
 	$(QUIET) echo "REQUIRE_TOOLS               : "$(REQUIRE_TOOLS)
 	$(QUIET) echo "REQUIRE_BIN                 : "$(REQUIRE_BIN)
+	$(QUIET) echo "PATH                        : "$(EPICS_MODULES)/$(PROJECT)/$(LIBVERSION)/R$(DEFAULT_EPICS_VERSIONS)/include
 	$(QUIET) echo ""
 
 conf:
@@ -173,5 +174,24 @@ epics-clean:
 .PHONY: env $(E3_ENV_NAME) $(EPICS_MODULE_SRC_PATH) git-submodule-sync init help help2 build clean install uninstall conf rebuild epics epics-clean checkout
 
 
+
+NDS3_INCLUDE:=$(EPICS_MODULES)/$(PROJECT)/$(LIBVERSION)/R$(DEFAULT_EPICS_VERSIONS)/include
+
+# # Create Symbolic links for all nds3 headers
+NDS3_HEADERS_TARGET:=$(NDS3_INCLUDE)/nds3
+NDS3_HEADERS=$(wildcard $(NDS3_INCLUDE)/*.h)
+
+
+include_nds3:  mkdir_nds3 $(NDS3_HEADERS)
+
+mkdir_nds3:
+	sudo mkdir -p  $(NDS3_HEADERS_TARGET)
+
+
+$(NDS3_HEADERS):
+	@printf "Symbolic link ... %44s >>> %40s \n" "$@" "$(NDS3_HEADERS_TARGET)/$(notdir $@)"
+	@sudo ln -snf $@  $(NDS3_HEADERS_TARGET)/$(notdir $@)	
+
+.PHONY: include_nds3 $(NDS3_HEADERS) mkdir_nds3
 
 
