@@ -3,8 +3,9 @@
 
 include $(TOP)/configure/E3/DEFINES_FT
 -include $(TOP)/configure/E3/RULES_PATCH
+include $(TOP)/configure/E3/RULES_NDS3
+
 include $(TOP)/configure/E3/RULES_E3
--include $(TOP)/configure/E3/RULES_NDS3
 include $(TOP)/configure/E3/RULES_EPICS
 
 include $(TOP)/configure/E3/RULES_DB

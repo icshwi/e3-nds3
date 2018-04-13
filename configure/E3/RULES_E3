@@ -25,7 +25,7 @@ help:
 
 
 ## Install : $(E3_MODULE_NAME)
-install: install_module install_links
+install: install_module install_links include_nds3
 
 #install_module: uninstall 
 install_module: uninstall db
@@ -78,7 +78,7 @@ checkout:
 .PHONY: install_links $(INSTALLED_EPICS_BASE_ARCHS)
 
 
-install_links: $(INSTALLED_EPICS_BASE_ARCHS) include_nds3
+install_links: $(INSTALLED_EPICS_BASE_ARCHS) 
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_INC) $(E3_MODULES_INSTALL_LOCATION_INC_LINK)
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_DB)  $(E3_MODULES_INSTALL_LOCATION_DB_LINK)
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_BIN) $(E3_MODULES_INSTALL_LOCATION_BIN_LINK)
