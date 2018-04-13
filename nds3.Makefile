@@ -13,11 +13,11 @@ APPINC:=include
 
 
 USR_CXXFLAGS += -std=c++0x
-USR_CXXFLAGS += -fvisibility=hidden
-USR_CXXFLAGS += -fvisibility-inlines-hidden
-USR_CXXFLAGS += -DNDS3_DLL
-USR_CXXFLAGS += -DNDS3_DLL_EXPORTS
-USR_CXXFLAGS += -Include
+#USR_CXXFLAGS += -fvisibility=hidden
+#USR_CXXFLAGS += -fvisibility-inlines-hidden
+#USR_CXXFLAGS += -DNDS3_DLL
+#USR_CXXFLAGS += -DNDS3_DLL_EXPORTS
+USR_CXXFLAGS += -Iinclude
 
 # USR_CFLAGS   += -Wno-unused-variable
 # USR_CFLAGS   += -Wno-unused-function
