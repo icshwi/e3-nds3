@@ -1,7 +1,8 @@
+.DEFAULT_GOAL := help
 
 .PHONY: help default install uninstall build rebuild clean conf
 
-default: help
+
 
 
 # # help is defined in 
@@ -22,10 +23,10 @@ help:
 	{ helpMsg = $$0 }'                              \
 	$(MAKEFILE_LIST) | column -ts:	
 
-
+default: help
 
 ## Install : $(E3_MODULE_NAME)
-install: install_module install_links include_nds3
+install: install_module install_links headerlinks
 
 #install_module: uninstall 
 install_module: uninstall db
