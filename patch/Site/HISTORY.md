@@ -1,7 +1,6 @@
-# what_ever_filename.p0.patch
+# 01.wrong_override_operator_not_error_either.p0.patch
 
-Generic Description.....
+There is a bug to handle operator override badly and some logic failure. 
 
 * created by Jeong Han Lee, han.lee@esss.se
-* related URL or reference https://github.com/icshwi
-* Tuesday, February 13 13:24:57 CET 2018
+* Monday, April 16 23:12:02 CEST 2018

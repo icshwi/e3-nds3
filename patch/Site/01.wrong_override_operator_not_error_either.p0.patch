@@ -1,0 +1,37 @@
+diff --git src/ndsFactoryImpl.cpp src/ndsFactoryImpl.cpp
+index 6ffa12b..97de395 100644
+--- src/ndsFactoryImpl.cpp
++++ src/ndsFactoryImpl.cpp
+@@ -133,14 +133,24 @@ void NdsFactoryImpl::registerDriver(const std::string &driverName, allocateDrive
+ {
+     std::lock_guard<std::mutex> lock(m_lockDrivers);
+ 
+-    if(m_driversAllocDealloc.find(driverName) != m_driversAllocDealloc.end())
+-    {
+-        std::ostringstream error;
+-        error << "The driver " << driverName << " has already been registered";
+-        std::cerr << error;
+-        //throw DriverAlreadyRegistered(error.str());
+-    }
+-    m_driversAllocDealloc[driverName] = std::pair<allocateDriver_t, deallocateDriver_t>(allocateFunction, deallocateFunction);
++
++    if ( m_driversAllocDealloc.find(driverName) == m_driversAllocDealloc.end() )
++      {
++	// dirverName is not found in its map (m_driversAllocDealloc), so define it. 
++	m_driversAllocDealloc[driverName] = std::pair<allocateDriver_t, deallocateDriver_t>(allocateFunction, deallocateFunction);
++      }
++    else
++      {
++	// driverName is found in its map (m_driversAllocDealloc), so generate msg, and throw ???? WHAT?
++	// So it is not error, change error string to msg to deliver to THROW!!!
++	// Monday, April 16 23:04:59 CEST 2018, jhlee
++	
++	std::string msg = "The driver ";
++	msg += driverName;
++	msg += " has already been registered";
++	throw DriverAlreadyRegistered(msg);
++      }
++
+ }
+ 
+ void NdsFactoryImpl::registerControlSystem(std::shared_ptr<FactoryBaseImpl> pControlSystem)
