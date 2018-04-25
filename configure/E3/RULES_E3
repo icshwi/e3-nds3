@@ -1,3 +1,8 @@
+###
+### THIS RULES_E3 have the special rules for nds3 only
+### Be aware to add ** headerlinks ** in install rule.
+###
+
 .DEFAULT_GOAL := help
 
 .PHONY: help default install uninstall build rebuild clean conf
@@ -26,22 +31,21 @@ default: help
 
 
 ## Install   : $(E3_MODULE_NAME)
-install: install_module install_links
+install: install_module install_links  headerlinks
 
-#install_module: uninstall 
+#install_module: uninstall
 install_module: uninstall db
 	$(QUIET) $(SUDOBASH) '$(E3_MODULE_MAKE_CMDS) install'
 
 ## Uninstall : $(E3_MODULE_NAME)
 uninstall: conf
 	$(QUIET) $(SUDOBASH) '$(E3_MODULE_MAKE_CMDS) uninstall'
-	$(SUDO) find $(E3_SITELIBS_PATH) -xtype l -delete 
+	$(SUDO) find $(E3_SITELIBS_PATH) -xtype l -delete
 
 ## Build the EPICS Module : $(E3_MODULE_NAME)
 # Build always the Module with the EPICS_MODULES_TAG
 build: conf checkout
 	$(QUIET) $(E3_MODULE_MAKE_CMDS) build
-
 
 ## Clean, build, and install the EPICS Module : $(E3_MODULE_NAME)
 rebuild: clean build install
@@ -59,7 +63,7 @@ conf:
 
 .PHONY: init git-submodule-sync $(E3_MODULE_SRC_PATH)  checkout
 
-## Initialize and Checkout : $(E3_MODULE_SRC_PATH) 
+## Initialize and Checkout : $(E3_MODULE_SRC_PATH)
 init: git-submodule-sync $(E3_MODULE_SRC_PATH)  checkout
 
 git-submodule-sync:
@@ -78,13 +82,13 @@ checkout:
 
 .PHONY: install_links $(INSTALLED_EPICS_BASE_ARCHS)
 
-# GNU find 
+# GNU find
 install_links: $(INSTALLED_EPICS_BASE_ARCHS)
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_INC) $(E3_MODULES_INSTALL_LOCATION_INC_LINK)
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_DB)  $(E3_MODULES_INSTALL_LOCATION_DB_LINK)
 	$(SUDO) ln -snf $(E3_MODULES_INSTALL_LOCATION_BIN) $(E3_MODULES_INSTALL_LOCATION_BIN_LINK)
 	$(SUDO) ln -sf  $(E3_MODULES_INSTALL_LOCATION_DBD) $(E3_MODULES_INSTALL_LOCATION_DBD_LINK)
-	$(SUDO) find $(E3_SITELIBS_PATH) -xtype l -delete 
+	$(SUDO) find $(E3_SITELIBS_PATH) -xtype l -delete
 
 
 $(INSTALLED_EPICS_BASE_ARCHS):

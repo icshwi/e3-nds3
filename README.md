@@ -12,8 +12,18 @@ make install
 ```
 
 ## Notice
+### Patch
 In order to compile it with > GCC 5, one should use patch. However, it is always better to use the patch.
 
 ```
 make patch
 ```
+
+### Headers location
+Due to the limitation of require makefile, we cannot put headers in target directory include/nds3, so the workaround without changing any codes in require and nds3, we use the symbolic links of all headers file while compiling. It was done by 
+
+```
+make headerlinks
+```
+We add that rule in the install rule. Please see configure/E3/RULES_{E3, NDS}. 
+
