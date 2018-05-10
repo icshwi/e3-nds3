@@ -1,4 +1,4 @@
 [submodule "nds3"]
 	path = nds3
-	url = git@bitbucket.org:europeanspallationsource/m-epics-nds3.git
+	url = https://bitbucket.org/europeanspallationsource/m-epics-nds3.git
 	ignore = all
