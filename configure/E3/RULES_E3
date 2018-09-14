@@ -31,7 +31,7 @@ default: help
 
 
 ## Install   : $(E3_MODULE_NAME)
-install: install_module install_links  headerlinks
+install: install_module install_links 
 
 #install_module: uninstall
 install_module: uninstall db

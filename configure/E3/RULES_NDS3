@@ -1,24 +1,14 @@
 
-# Create Symbolic links for all nds3 headers
-NDS3_HEADERS_TARGET:=$(E3_MODULES_INSTALL_LOCATION_INC)/nds3
+NDS3_HEADERS=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3/*.h))
+NDS3IMPL_HEADERS=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3impl/*.h))
 
-NDS3_HEADERS=$(wildcard $(E3_MODULE_SRC_PATH)/include/nds3/*.h)
-NDS3_HEADERS+=$(wildcard $(E3_MODULE_SRC_PATH)/include/nds3impl/*.h)
+nds3: nds3impl
+	$(SUDO) install -m 755 -d $(E3_MODULES_INSTALL_LOCATION_INC)/nds3
+	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv $(NDS3_HEADERS) nds3/
 
+nds3impl:
+	$(SUDO) install -m 755 -d $(E3_MODULES_INSTALL_LOCATION_INC)/nds3impl
+	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv $(NDS3IMPL_HEADERS) nds3impl/	
 
-headerlinks: mkdir_nds3 $(NDS3_HEADERS)
+.PHONY: nds3 nds3impl
 
-
-mkdir_nds3:
-	$(SUDO) mkdir -p  $(NDS3_HEADERS_TARGET)
-
-
-$(NDS3_HEADERS):
-	@printf "Symbolic link ... %44s >>> %40s \n" "$@" "$(NDS3_HEADERS_TARGET)/$(notdir $@)"
-	@$(SUDO) ln -snf ../$(notdir $@)  $(NDS3_HEADERS_TARGET)/$(notdir $@)	
-
-.PHONY: headerlinks  mkdir_nds3 $(NDS3_HEADERS)
-
-
-# VARS_EXCLUDES+=NDS3_HEADERS_TARGET
-# VARS_EXCLUDES+=NDS3_HEADERS
