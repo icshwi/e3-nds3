@@ -1,11 +1,10 @@
 
 NDS3_HEADERS+=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3/*.h))
 NDS3_HEADERS+=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3impl/*.h))
-#NDS3IMPL_HEADERS=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3impl/*.h))
 
-nds3: 
+nds3_headers: 
 	$(SUDO) install -m 755 -d $(E3_MODULES_INSTALL_LOCATION_INC)/nds3
-	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv $(NDS3_HEADERS) nds3/
+	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv $(NDS3_HEADERS)  nds3/
 
-.PHONY: nds3 nds3impl
+.PHONY: nds3_headers
 
