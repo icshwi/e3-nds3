@@ -1,12 +1,16 @@
+NDS3_HEADERS+=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3/*.h))
+NDS3_HEADERS+=$(notdir $(wildcard $(E3_MODULE_SRC_PATH)/include/nds3impl/*.h))
+
 #
 .PHONY: db pv epics epics-clean
 
 db: conf
 	$(QUIET) $(E3_MODULE_MAKE_CMDS) db
 
-pv:
-#	$(SUDO) install -m 755 -d $(E3_MODULES_INSTALL_LOCATION_INC)/pv
-#	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv *.h pv/
+.PHONY: hdrs
+hdrs:
+	$(SUDO) install -m 755 -d $(E3_MODULES_INSTALL_LOCATION_INC)/nds3
+	cd $(E3_MODULES_INSTALL_LOCATION_INC) && $(SUDO) mv $(NDS3_HEADERS) nds3
 
 epics:
 	$(QUIET)echo "EPICS_BASE=$(EPICS_BASE)"        > $(TOP)/$(E3_MODULE_SRC_PATH)/configure/RELEASE
