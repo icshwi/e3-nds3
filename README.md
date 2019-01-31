@@ -24,7 +24,7 @@ make install
 
 ## Notice
 ### Patch
-In order to compile it with > GCC 5, one should use patch. However, it is always better to use the patch.
+It is mandatory to apply patch files now. 
 
 ```
 make patch
