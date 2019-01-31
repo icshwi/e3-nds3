@@ -1,0 +1,13 @@
+diff --git include/nds3/registerDevice.h include/nds3/registerDevice.h
+index 5715e7f..8a8e750 100644
+--- include/nds3/registerDevice.h
++++ include/nds3/registerDevice.h
+@@ -27,7 +27,7 @@ public:
+     }
+ 
+     const char *getDriverName() {
+-        return m_driverName;
++        return m_driverName.c_str();
+     }
+ 
+ protected:
