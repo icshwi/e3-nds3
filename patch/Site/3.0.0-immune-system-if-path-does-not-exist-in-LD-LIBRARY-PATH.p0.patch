@@ -1,0 +1,13 @@
+diff --git src/ndsFactoryImpl.cpp src/ndsFactoryImpl.cpp
+index 6ffa12b..a83357c 100644
+--- src/ndsFactoryImpl.cpp
++++ src/ndsFactoryImpl.cpp
+@@ -520,7 +520,7 @@ Directory::Directory(const std::string &directory)
+     {
+         std::ostringstream exceptionMessage;
+         exceptionMessage << strerror(errno) << " while opening the directory " << directory << std::endl;
+-        throw DirectoryNotFoundError(exceptionMessage.str());
++	std::cout << "Warning : " << exceptionMessage.str() << std::endl;
+     }
+ }
+ 
